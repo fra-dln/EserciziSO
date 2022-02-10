@@ -37,6 +37,7 @@ int main(int argc, char **argv){
         if(pid<0){printf("cant fork\n"); exit(-1);}
         
         else if(pid==0){//processo figlio
+            printf("Hi! i'm a kiddo");
             execlp("ls", "ls", path[i], NULL);
 			exit(0);
         }
