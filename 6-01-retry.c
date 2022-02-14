@@ -28,12 +28,13 @@ static const char *filename = "testfile.txt";
         char *text;
 
         printf("Child: Write a message i will pass it to the parent process: ");
-        if(scanf("%m[\n]", &text) == -1){
+        if(scanf("%m[^\n]", &text) == -1){
             printf("Child scanf error");
             exit(-1);
         }
+        printf("after scan\n");
         len = strlen(text);
-
+        printf("%s\n",text);
         if(write(fd, text, len)==-1){
             printf("Unable to write on file\n");
             exit(-1);

@@ -28,7 +28,7 @@ int main(int argc, char **argv){
     
 
     fd=open("testfile.txt",O_CREAT|O_RDWR|O_TRUNC, S_IRWXU|S_IRWXG|S_IRWXO);
-
+    printf("%d\n",fd);
     if (fd==-1){
         printf("Unable to create test file. Program will be shutted down\n");
         sleep(1);
@@ -45,17 +45,17 @@ int main(int argc, char **argv){
         char *buff;
         printf("Insert a message to be writed in the file\n");
 
-        scanf("%m[\n]", &buff);
-
+        scanf("%m[^\n]", &buff);
+        printf("stringa inserita: %s\n",buff);
         printf("pre-write\n");
-        if (write(fd, buff, strlen(buff)) == -1) {
+        if (write(fd, buff, (size_t)strlen(buff)) == -1) {
 			printf("Unable to write on file\n");
 			exit(-1);
 		}
-        
+        printf("postwrite\n");
         free(buff);
         close(fd);
-        printf("Roger that! count = %d\n exiting child process\n",count);
+        printf("Roger that! exiting child process\n");
         exit(0);
     }
     else{
@@ -71,7 +71,6 @@ int main(int argc, char **argv){
             return 4;
         }*/
         close(fd);
-        printf("%d\n",count);
         printf("%d\n",ctrl);
         printf("string readed from file: %s",letto);
     }
